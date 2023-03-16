@@ -16,6 +16,7 @@ function dragEnd(){
 function dragOver(e){
     e.preventDefault()
     setTimeout(()=>(this.className='box over'))
+
 }
 function dragEnter(){
     console.log("Enter");
@@ -25,7 +26,18 @@ function dragLeave(){
 
 }
 function dragDrop(){
-    let img=document.querySelector("div.none > img")
+    let img=document.querySelector("div.selectImg> div.none > img");
+    if(this.children.length>0){
+        function dragBlock(e){
+            e.preventDefault()
+            alert('Bu qutu artıq doludur')
+        }
+        this.className='item'
+        dragBlock()
+    }
+
+    this.className='item';
+    this.append(img)
     console.log("Drop");
 }
 
@@ -39,4 +51,12 @@ for (let j=0; j<box.length; j++){
     box[j].addEventListener('dragenter', dragEnter);
     box[j].addEventListener('dragleave', dragLeave);
     box[j].addEventListener('drop', dragDrop);
+
+    box[j].addEventListener('dragstart', dragBlock);
+
+    function dragBlock(e){
+        e.preventDefault();
+        alert('Yerləşdirilən şəkli başqa yerə aparıla bilməz')
+    }
+
 }
